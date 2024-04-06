@@ -2,7 +2,7 @@
 
 Encrypt-Fox is a bash script that allows you to encrypt your Firefox profile using GPG (GNU Privacy Guard) and prompt for a password each time you want to use Firefox. This provides an extra layer of security for your browsing data.
 
-**NOTE: This is pre-alpha quality software. Do not use it without expecting data loss. I am not responsible for any data loss or damage caused by using this script. I made it for myself since I wanted to functionality with the help of Claude 3 opus, but I will be adding features and updating it myself**
+**NOTE: This is pre-alpha quality software. Do not use it without expecting data loss. I am not responsible for any data loss or damage caused by using this script. I made it for myself since I wanted this functionality and made it with the help of Claude 3 Opus, but I will be adding features and updating it myself**
 
 ## Prerequisites
 
