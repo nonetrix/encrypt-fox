@@ -10,6 +10,7 @@ Before using Encrypt-Fox, ensure that you have the following dependencies instal
 
 - GPG (GNU Privacy Guard)
 - tar
+- find
 
 ## Installation
 
