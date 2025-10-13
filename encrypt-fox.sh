@@ -12,8 +12,20 @@ if ! command -v tar &> /dev/null; then
   exit 1
 fi
 
-firefox_profile_dir="$HOME/.mozilla/firefox/81xk3qby.encrypted"
-encrypted_profile_dir="$HOME/.mozilla_encrypted/firefox/81xk3qby.encrypted"
+# Find *.encrypted directories in the Firefox profiles folder
+encrypted_profiles=$(find "$HOME/.mozilla/firefox" -maxdepth 1 -type d -name "*.encrypted")
+
+# Count the number of found profiles
+profile_count=$(echo "$encrypted_profiles" | wc -l)
+
+# Error out if more than one or no encrypted profiles are found
+if [ "$profile_count" -ne 1 ]; then
+  echo "Error: Found $profile_count profiles matching *.encrypted. Please ensure there is exactly one."
+  exit 1
+fi
+
+firefox_profile_dir="$encrypted_profiles"
+encrypted_profile_dir="$HOME/.mozilla_encrypted/firefox/$(basename "$firefox_profile_dir")"
 encrypted_file="$encrypted_profile_dir/encrypted.tar.gz.gpg"
 
 # Function to encrypt the Firefox profile
@@ -34,18 +46,18 @@ if [ -f "$encrypted_file" ]; then
   # Prompt for the decryption password
   read -s -p "Enter the decryption password: " encryption_password
   echo
-  
+
   # Decrypt the profile
   decrypt_profile
 else
   # Create the necessary directories if they don't exist
   mkdir -p "$firefox_profile_dir"
   mkdir -p "$encrypted_profile_dir"
-  
+
   # Prompt for the encryption password
   read -s -p "Enter the encryption password: " encryption_password
   echo
-  
+
   # Encrypt the profile with the provided password
   encrypt_profile
 fi
